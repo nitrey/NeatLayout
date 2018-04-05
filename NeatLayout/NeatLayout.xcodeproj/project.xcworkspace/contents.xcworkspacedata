@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:NeatLayout.xcodeproj">
+      location = "self:/Users/nitrey/Developer/MyPOD/OneMoreTry/NeatLayout_iOS/NeatLayout.xcodeproj">
    </FileRef>
 </Workspace>
