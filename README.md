@@ -11,3 +11,9 @@ Available constraints are designed for:
 - setting view's width, height or size
 
 Also includes tests for all methods.
+
+-----------------------------------------------------
+
+All you need to start using NeatLayout in your project, just add NeatLayout.swift file (to "Extensions" folder in your project, if you're a tidy person).
+
+GLHF
