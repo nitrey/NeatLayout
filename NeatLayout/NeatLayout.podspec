@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.description      = 'Provides methods for adding constraints in code with easy syntax similar to one of PureLayout.'
 
   s.homepage         = 'https://github.com/nitrey/NeatLayout'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'MIT', :file => 'NeatLayout/LICENSE' }
   s.author           = { 'Antonov Alexander' => 'aa@finch-melrose.com' }
   s.source           = { :git => 'https://github.com/nitrey/NeatLayout.git', :tag => s.version.to_s }
 
