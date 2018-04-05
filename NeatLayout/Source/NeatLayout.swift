@@ -97,12 +97,12 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoPinEdgeToSuperviewEdge(_ edge: Edge, withInset inset: CGFloat = 0) -> NSLayoutConstraint {
-        return autoPinEdgeToSuperviewEdge(edge, withInset: inset, relation: .equal)
+    public func autoPinEdge(toSuperviewEdge edge: Edge, withInset inset: CGFloat = 0) -> NSLayoutConstraint {
+        return autoPinEdge(toSuperviewEdge: edge, withInset: inset, relation: .equal)
     }
     
     @discardableResult
-    public func autoPinEdgeToSuperviewEdge(_ edge: Edge, withInset inset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    public func autoPinEdge(toSuperviewEdge edge: Edge, withInset inset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
         
         guard let superview = self.superview else {
             fatalError(noSuperviewMessage)
@@ -310,7 +310,7 @@ public extension UIView {
         
         for edge in edges {
             let inset = getInset(from: insets, for: edge)
-            let newConstraint = autoPinEdgeToSuperviewEdge(edge, withInset: inset)
+            let newConstraint = autoPinEdge(toSuperviewEdge: edge, withInset: inset)
             constraints.append(newConstraint)
         }
         

@@ -90,8 +90,8 @@ class Tests: XCTestCase {
     
     func testAutoPinTopAndLeftEdgesToSuperviewEdgesWithInset_FrameShouldMatchCalculatedRect() {
         
-        testingView.autoPinEdgeToSuperviewEdge(.top, withInset: 125)
-        testingView.autoPinEdgeToSuperviewEdge(.left, withInset: 200)
+        testingView.autoPinEdge(toSuperviewEdge: .top, withInset: 125)
+        testingView.autoPinEdge(toSuperviewEdge: .left, withInset: 200)
         evaluateLayout()
         
         let calculatedFrame = CGRect(x: 200, y: 125, width: 0, height: 0)
@@ -103,8 +103,8 @@ class Tests: XCTestCase {
     
     func testAutoPinBottomAndRightEdgesToSuperviewEdgesWithInset_FrameShouldMatchCalculatedRect() {
         
-        testingView.autoPinEdgeToSuperviewEdge(.bottom, withInset: 125)
-        testingView.autoPinEdgeToSuperviewEdge(.right, withInset: 200)
+        testingView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 125)
+        testingView.autoPinEdge(toSuperviewEdge: .right, withInset: 200)
         testingView.autoSetDimension(.width, toSize: 0)
         testingView.autoSetDimension(.height, toSize: 0)
         evaluateLayout()
@@ -123,8 +123,8 @@ class Tests: XCTestCase {
         
         testingView.autoSetDimensions(to: CGSize(width: 50, height: 60))
         otherView.autoSetDimensions(to: CGSize(width: 500, height: 500))
-        otherView.autoPinEdgeToSuperviewEdge(.left, withInset: 100)
-        otherView.autoPinEdgeToSuperviewEdge(.bottom, withInset: 200)
+        otherView.autoPinEdge(toSuperviewEdge: .left, withInset: 100)
+        otherView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 200)
         testingView.autoPinEdge(.left, to: .right, of: otherView, withOffset: 150)
         testingView.autoPinEdge(.bottom, to: .top, of: otherView, withOffset: -170)
         evaluateLayout()
