@@ -198,8 +198,8 @@ class Tests: XCTestCase {
         otherView.autoSetDimensions(to: CGSize(width: 400, height: 250))
         let widthOffset: CGFloat = 125
         let heightOffset: CGFloat = 265
-        testingView.autoMatchDimension(.width, to: .width, of: otherView, withOffset: widthOffset)
-        testingView.autoMatchDimension(.height, to: .width, of: otherView, withOffset: heightOffset)
+        testingView.autoMatch(.width, to: .width, of: otherView, withOffset: widthOffset)
+        testingView.autoMatch(.height, to: .width, of: otherView, withOffset: heightOffset)
         evaluateLayout()
         
         XCTAssertEqual(testingView.frame.size.width, otherView.frame.size.width + widthOffset, accuracy: allowedDelta)
@@ -213,8 +213,8 @@ class Tests: XCTestCase {
         otherView.autoSetDimensions(to: CGSize(width: 400, height: 250))
         let widthOffset: CGFloat = 432
         let heightOffset: CGFloat = 333
-        testingView.autoMatchDimension(.width, to: .height, of: otherView, withOffset: widthOffset)
-        testingView.autoMatchDimension(.height, to: .height, of: otherView, withOffset: heightOffset)
+        testingView.autoMatch(.width, to: .height, of: otherView, withOffset: widthOffset)
+        testingView.autoMatch(.height, to: .height, of: otherView, withOffset: heightOffset)
         evaluateLayout()
         
         XCTAssertEqual(testingView.frame.size.width, otherView.frame.size.height + widthOffset, accuracy: allowedDelta)
@@ -228,8 +228,8 @@ class Tests: XCTestCase {
         otherView.autoSetDimensions(to: CGSize(width: 400, height: 250))
         let widthMultiplier: CGFloat = 1.75
         let heightMultiplier: CGFloat = 1.55
-        testingView.autoMatchDimension(.width, to: .width, of: otherView, withMultiplier: widthMultiplier)
-        testingView.autoMatchDimension(.height, to: .width, of: otherView, withMultiplier: heightMultiplier)
+        testingView.autoMatch(.width, to: .width, of: otherView, withMultiplier: widthMultiplier)
+        testingView.autoMatch(.height, to: .width, of: otherView, withMultiplier: heightMultiplier)
         evaluateLayout()
         
         XCTAssertEqual(testingView.frame.size.width, otherView.frame.size.width * widthMultiplier, accuracy: allowedDelta)
@@ -243,8 +243,8 @@ class Tests: XCTestCase {
         otherView.autoSetDimensions(to: CGSize(width: 400, height: 250))
         let widthMultiplier: CGFloat = 1.75
         let heightMultiplier: CGFloat = 1.55
-        testingView.autoMatchDimension(.width, to: .height, of: otherView, withMultiplier: widthMultiplier)
-        testingView.autoMatchDimension(.height, to: .height, of: otherView, withMultiplier: heightMultiplier)
+        testingView.autoMatch(.width, to: .height, of: otherView, withMultiplier: widthMultiplier)
+        testingView.autoMatch(.height, to: .height, of: otherView, withMultiplier: heightMultiplier)
         evaluateLayout()
         
         XCTAssertEqual(testingView.frame.size.width, otherView.frame.size.height * widthMultiplier, accuracy: allowedDelta)

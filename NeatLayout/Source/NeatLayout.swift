@@ -218,12 +218,12 @@ public extension UIView {
     // MARK: - Match Dimensions
     
     @discardableResult
-    func autoMatchDimension(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
-        return autoMatchDimension(dimension, to: toDimension, of: otherView, withOffset: offset, relation: .equal)
+    func autoMatch(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+        return autoMatch(dimension, to: toDimension, of: otherView, withOffset: offset, relation: .equal)
     }
     
     @discardableResult
-    public func autoMatchDimension(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
+    public func autoMatch(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
@@ -246,12 +246,12 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoMatchDimension(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withMultiplier multiplier: CGFloat = 1.0) -> NSLayoutConstraint {
-        return autoMatchDimension(dimension, to: toDimension, of: otherView, withMultiplier: multiplier, relation: .equal)
+    public func autoMatch(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withMultiplier multiplier: CGFloat = 1.0) -> NSLayoutConstraint {
+        return autoMatch(dimension, to: toDimension, of: otherView, withMultiplier: multiplier, relation: .equal)
     }
     
     @discardableResult
-    public func autoMatchDimension(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withMultiplier multiplier: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    public func autoMatch(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withMultiplier multiplier: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
