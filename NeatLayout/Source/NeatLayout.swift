@@ -223,7 +223,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoMatch(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
+    public func autoMatch(_ dimension: Dimension, to toDimension: Dimension, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
