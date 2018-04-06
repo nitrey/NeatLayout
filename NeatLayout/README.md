@@ -1,6 +1,5 @@
 # NeatLayout
 
-[![CI Status](http://img.shields.io/travis/nitrey/NeatLayout.svg?style=flat)](https://travis-ci.org/nitrey/NeatLayout)
 [![Version](https://img.shields.io/cocoapods/v/NeatLayout.svg?style=flat)](http://cocoapods.org/pods/NeatLayout)
 [![License](https://img.shields.io/cocoapods/l/NeatLayout.svg?style=flat)](http://cocoapods.org/pods/NeatLayout)
 [![Platform](https://img.shields.io/cocoapods/p/NeatLayout.svg?style=flat)](http://cocoapods.org/pods/NeatLayout)
@@ -32,7 +31,20 @@ pod 'NeatLayout'
 
 ## Usage
 
-/Users/nitrey/Desktop/UsageExample.png
+```Swift
+
+headerView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
+headerView.autoSetDimension(.height, toSize: 250)
+        
+titleLabel.autoPin(toTopLayoutGuideOf: self, withInset: 40)
+titleLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16)
+        
+imageView.autoAlignAxis(.baseline, toSameAxisOf: titleLabel)
+imageView.autoPinEdge(.right, to: .left, of: titleLabel, withOffset: 12, relation: .greaterThanOrEqual)
+imageView.autoSetDimensions(to: CGSize(width: 32, height: 32))
+imageView.autoPinEdge(toSuperviewEdge: .left, withInset: 20) 
+
+```
 
 ## Author
 
