@@ -248,8 +248,61 @@ public extension UIView {
     public func autoPin(toTopLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
-        guard let otherAnchor = viewController.view?.safeAreaLayoutGuide.topAnchor else {
-            fatalError(noViewMessage)
+        
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            
+            guard let otherAnchor = viewController.view?.safeAreaLayoutGuide.topAnchor else {
+                fatalError(noViewMessage)
+            }
+            
+            return pin(anchor: topAnchor, toSafeAreaAnchor: otherAnchor, withInset: inset, relation: relation)
+            
+        } else {
+            
+            let constraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: relation, toItem: viewController.topLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: inset)
+            constraint.isActive = true
+            return constraint
+            
+        }
+    }
+    
+    @discardableResult
+    public func autoPin(toBottomLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        // we use reversed relation because at bottom of views insets and offsets behavior in a different way
+        let editedRelation = reverseRelation(for: relation)
+        let editedInset = -inset
+        
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            
+            guard let otherAnchor = viewController.view?.safeAreaLayoutGuide.bottomAnchor else {
+                fatalError(noViewMessage)
+            }
+            
+            return pin(anchor: bottomAnchor, toSafeAreaAnchor: otherAnchor, withInset: editedInset, relation: editedRelation)
+            
+        } else {
+            
+            let constraint = NSLayoutConstraint(item: self,
+                                                attribute: .top,
+                                                relatedBy: editedRelation,
+                                                toItem: viewController.topLayoutGuide,
+                                                attribute: .bottom,
+                                                multiplier: 1.0,
+                                                constant: editedInset)
+            addConstraint(constraint)
+            constraint.isActive = true
+            return constraint
+        }
+        
+    }
+    
+    private func pin(anchor: NSLayoutYAxisAnchor, toSafeAreaAnchor otherAnchor: NSLayoutYAxisAnchor, withInset inset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+        
+        guard #available(iOS 11.0, tvOS 11.0, *) else {
+            fatalError("pin(anchor:toSafeAreaAnchor:) method should be called only on iOS and tvOS 11.0 or higher")
         }
         
         let constraint: NSLayoutConstraint
@@ -257,39 +310,11 @@ public extension UIView {
         switch relation {
             
         case .equal:
-            constraint = topAnchor.constraint(equalTo: otherAnchor, constant: inset)
+            constraint = anchor.constraint(equalTo: otherAnchor, constant: inset)
         case .greaterThanOrEqual:
-            constraint = topAnchor.constraint(greaterThanOrEqualTo: otherAnchor, constant: inset)
+            constraint = anchor.constraint(greaterThanOrEqualTo: otherAnchor, constant: inset)
         case .lessThanOrEqual:
-            constraint = topAnchor.constraint(lessThanOrEqualTo: otherAnchor, constant: inset)
-        }
-        
-        constraint.isActive = true
-        return constraint
-    }
-    
-    @discardableResult
-    public func autoPin(toBottomLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        guard let otherAnchor = viewController.view?.safeAreaLayoutGuide.bottomAnchor else {
-            fatalError(noViewMessage)
-        }
-        
-        let editedInset = -inset
-        let constraint: NSLayoutConstraint
-        
-        // we use reversed relation because at bottom of views insets and offsets behavior in a different way
-        let editedRelation = reverseRelation(for: relation)
-        
-        switch editedRelation {
-            
-        case .equal:
-            constraint = bottomAnchor.constraint(equalTo: otherAnchor, constant: editedInset)
-        case .greaterThanOrEqual:
-            constraint = bottomAnchor.constraint(greaterThanOrEqualTo: otherAnchor, constant: editedInset)
-        case .lessThanOrEqual:
-            constraint = bottomAnchor.constraint(lessThanOrEqualTo: otherAnchor, constant: editedInset)
+            constraint = anchor.constraint(lessThanOrEqualTo: otherAnchor, constant: inset)
         }
         
         constraint.isActive = true
