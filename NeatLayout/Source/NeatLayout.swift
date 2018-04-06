@@ -262,7 +262,6 @@ public extension UIView {
             let constraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: relation, toItem: viewController.topLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: inset)
             constraint.isActive = true
             return constraint
-            
         }
     }
     
