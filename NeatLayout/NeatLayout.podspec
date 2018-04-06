@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'NeatLayout'
-  s.version          = '0.1.6'
+  s.version          = '0.2.0'
   s.summary          = 'UIView extension for simple constraint-adding syntax.'
   s.description      = 'Provides methods for adding constraints in code with easy syntax similar to one of PureLayout.'
 

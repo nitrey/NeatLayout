@@ -13,6 +13,8 @@ class Tests: XCTestCase {
     
     // MARK: - Views for testing
     
+    private var viewController: UIViewController!
+    
     private var containerView: UIView!
     private var testingView: UIView!
     private var otherView: UIView!
@@ -23,7 +25,10 @@ class Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        containerView = UIView(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
+        viewController = UIViewController()
+        containerView = viewController.view
+        let containerFrame = CGRect(x: 0, y: 0, width: 1000, height: 1000)
+        containerView.frame = containerFrame
         testingView = UIView()
         otherView = UIView()
         
@@ -249,6 +254,41 @@ class Tests: XCTestCase {
         
         XCTAssertEqual(testingView.frame.size.width, otherView.frame.size.height * widthMultiplier, accuracy: allowedDelta)
         XCTAssertEqual(testingView.frame.size.height, otherView.frame.size.height * heightMultiplier, accuracy: allowedDelta)
+    }
+    
+    
+    // MARK: - Pin to Layout Guides
+    
+    func testPinToTopLayoutGuide_DistanceFromTopSafeAreaShouldMatchOffset() {
+        
+        let viewSize = CGSize(width: 400, height: 400)
+        testingView.autoSetDimensions(to: viewSize)
+        testingView.autoAlignAxis(toSuperviewAxis: .vertical)
+        testingView.autoPin(toTopLayoutGuideOf: viewController, withInset: 40)
+        evaluateLayout()
+        
+        let safeAreaTopInset = containerView.safeAreaInsets.top
+        let calculatedFrame = CGRect(x: 300, y: safeAreaTopInset + 40, width: viewSize.width, height: viewSize.height)
+        XCTAssertEqual(testingView.frame.origin.x, calculatedFrame.origin.x, accuracy: allowedDelta)
+        XCTAssertEqual(testingView.frame.origin.y, calculatedFrame.origin.y, accuracy: allowedDelta)
+        XCTAssertEqual(testingView.frame.width, calculatedFrame.width, accuracy: allowedDelta)
+        XCTAssertEqual(testingView.frame.height, calculatedFrame.height, accuracy: allowedDelta)
+    }
+    
+    func testPinToBottomLayoutGuide_DistanceFromBottomSafeAreaShouldMatchOffset() {
+        
+        let viewSize = CGSize(width: 400, height: 400)
+        testingView.autoSetDimensions(to: viewSize)
+        testingView.autoAlignAxis(toSuperviewAxis: .vertical)
+        testingView.autoPin(toBottomLayoutGuideOf: viewController, withInset: 40)
+        evaluateLayout()
+        
+        let safeAreaBottomInset = containerView.safeAreaInsets.bottom
+        let calculatedFrame = CGRect(x: 300, y: 1000 - 40 - safeAreaBottomInset - viewSize.height, width: viewSize.width, height: viewSize.height)
+        XCTAssertEqual(testingView.frame.origin.x, calculatedFrame.origin.x, accuracy: allowedDelta)
+        XCTAssertEqual(testingView.frame.origin.y, calculatedFrame.origin.y, accuracy: allowedDelta)
+        XCTAssertEqual(testingView.frame.width, calculatedFrame.width, accuracy: allowedDelta)
+        XCTAssertEqual(testingView.frame.height, calculatedFrame.height, accuracy: allowedDelta)
     }
     
     
