@@ -66,14 +66,14 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoPinEdge(toSuperviewEdge edge: NLEdge, withInset inset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    public func autoPinEdge(toSuperviewEdge edge: NLEdge, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         guard let superview = self.superview else {
             fatalError(noSuperviewMessage)
         }
         
         let offset: CGFloat
-        let editedRelation: NSLayoutRelation
+        let editedRelation: NSLayoutConstraint.Relation
         
         switch edge {
         case .bottom, .right:
@@ -96,7 +96,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoPinEdge(_ edge: NLEdge, to toEdge: NLEdge, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    public func autoPinEdge(_ edge: NLEdge, to toEdge: NLEdge, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         let axis = edge.axis
         let toAxis = toEdge.axis
@@ -153,7 +153,7 @@ public extension UIView {
     // MARK: - Set Dimensions
     
     @discardableResult
-    public func autoSetDimension(_ dimension: NLDimension, toSize size: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
+    public func autoSetDimension(_ dimension: NLDimension, toSize size: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
@@ -191,7 +191,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    public func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
@@ -219,7 +219,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withMultiplier multiplier: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    public func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withMultiplier multiplier: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
@@ -245,7 +245,7 @@ public extension UIView {
     // MARK: - Pin to Layout Guides
     
     @discardableResult
-    public func autoPin(toTopLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
+    public func autoPin(toTopLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -266,7 +266,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoPin(toBottomLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutRelation = .equal) -> NSLayoutConstraint {
+    public func autoPin(toBottomLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -298,7 +298,7 @@ public extension UIView {
         
     }
     
-    private func pin(anchor: NSLayoutYAxisAnchor, toSafeAreaAnchor otherAnchor: NSLayoutYAxisAnchor, withInset inset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    private func pin(anchor: NSLayoutYAxisAnchor, toSafeAreaAnchor otherAnchor: NSLayoutYAxisAnchor, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         guard #available(iOS 11.0, tvOS 11.0, *) else {
             fatalError("pin(anchor:toSafeAreaAnchor:) method should be called only on iOS and tvOS 11.0 or higher")
@@ -396,7 +396,7 @@ public extension UIView {
         
     }
     
-    private func xAxisConstraint(anchor: NSLayoutXAxisAnchor, toAnchor: NSLayoutXAxisAnchor, offset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    private func xAxisConstraint(anchor: NSLayoutXAxisAnchor, toAnchor: NSLayoutXAxisAnchor, offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         switch relation {
             
@@ -410,7 +410,7 @@ public extension UIView {
         
     }
     
-    private func yAxisConstraint(anchor: NSLayoutYAxisAnchor, toAnchor: NSLayoutYAxisAnchor, offset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    private func yAxisConstraint(anchor: NSLayoutYAxisAnchor, toAnchor: NSLayoutYAxisAnchor, offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         switch relation {
             
@@ -424,7 +424,7 @@ public extension UIView {
         
     }
     
-    private func baselineConstraint(to otherView: UIView, offset: CGFloat, relation: NSLayoutRelation) -> NSLayoutConstraint {
+    private func baselineConstraint(to otherView: UIView, offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         let anchor = lastBaselineAnchor
         let toAnchor = otherView.lastBaselineAnchor
@@ -457,7 +457,7 @@ public extension UIView {
         
     }
     
-    private func reverseRelation(for relation: NSLayoutRelation) -> NSLayoutRelation {
+    private func reverseRelation(for relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint.Relation {
         
         switch relation {
             
