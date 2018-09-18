@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'NeatLayout'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'UIView extension for simple constraint-adding syntax.'
   s.description      = 'Provides methods for adding constraints in code with easy syntax similar to one of PureLayout.'
 
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
   
-  s.source_files = 'Source/**/*.{h,m,swift}'
+  s.source_files = 'NeatLayout/Source/**/*.{h,m,swift}'
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
 
