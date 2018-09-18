@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
   
-  s.source_files = 'NeatLayout/Source/**/*.{h,m,swift}'
+  s.source_files = 'Source/**/*.{h,m,swift}'
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
 
