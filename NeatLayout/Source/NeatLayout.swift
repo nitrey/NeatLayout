@@ -15,7 +15,7 @@ public extension UIView {
     // MARK: - Center & Align in Superview
     
     @discardableResult
-    public func autoAlignAxis(toSuperviewAxis axis: NLAxis, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    func autoAlignAxis(toSuperviewAxis axis: NLAxis, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         
         guard let superview = self.superview else {
             fatalError(noSuperviewMessage)
@@ -25,7 +25,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoCenterInSuperview() -> [NSLayoutConstraint] {
+    func autoCenterInSuperview() -> [NSLayoutConstraint] {
         
         guard let superview = self.superview else {
             fatalError(noSuperviewMessage)
@@ -43,7 +43,7 @@ public extension UIView {
     // MARK: - Pin Edges to Superview
     
     @discardableResult
-    public func autoPinEdgesToSuperviewEdges(with insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+    func autoPinEdgesToSuperviewEdges(with insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -52,7 +52,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoPinEdgesToSuperviewEdges(with insets: UIEdgeInsets = .zero, excludingEdge edge: NLEdge) -> [NSLayoutConstraint] {
+    func autoPinEdgesToSuperviewEdges(with insets: UIEdgeInsets = .zero, excludingEdge edge: NLEdge) -> [NSLayoutConstraint] {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -61,12 +61,12 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoPinEdge(toSuperviewEdge edge: NLEdge, withInset inset: CGFloat = 0) -> NSLayoutConstraint {
+    func autoPinEdge(toSuperviewEdge edge: NLEdge, withInset inset: CGFloat = 0) -> NSLayoutConstraint {
         return autoPinEdge(toSuperviewEdge: edge, withInset: inset, relation: .equal)
     }
     
     @discardableResult
-    public func autoPinEdge(toSuperviewEdge edge: NLEdge, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
+    func autoPinEdge(toSuperviewEdge edge: NLEdge, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         guard let superview = self.superview else {
             fatalError(noSuperviewMessage)
@@ -91,12 +91,12 @@ public extension UIView {
     // MARK: - Pin edges
     
     @discardableResult
-    public func autoPinEdge(_ edge: NLEdge, to toEdge: NLEdge, of otherView: UIView, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    func autoPinEdge(_ edge: NLEdge, to toEdge: NLEdge, of otherView: UIView, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         return autoPinEdge(edge, to: toEdge, of: otherView, withOffset: offset, relation: .equal)
     }
     
     @discardableResult
-    public func autoPinEdge(_ edge: NLEdge, to toEdge: NLEdge, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
+    func autoPinEdge(_ edge: NLEdge, to toEdge: NLEdge, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         let axis = edge.axis
         let toAxis = toEdge.axis
@@ -130,7 +130,7 @@ public extension UIView {
     // MARK: - Align Axes
     
     @discardableResult
-    public func autoAlignAxis(_ axis: NLAxis, toSameAxisOf otherView: UIView, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    func autoAlignAxis(_ axis: NLAxis, toSameAxisOf otherView: UIView, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
@@ -153,7 +153,7 @@ public extension UIView {
     // MARK: - Set Dimensions
     
     @discardableResult
-    public func autoSetDimension(_ dimension: NLDimension, toSize size: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
+    func autoSetDimension(_ dimension: NLDimension, toSize size: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
@@ -167,6 +167,8 @@ public extension UIView {
             constraint = anchor.constraint(greaterThanOrEqualToConstant: size)
         case .lessThanOrEqual:
             constraint = anchor.constraint(lessThanOrEqualToConstant: size)
+        @unknown default:
+            fatalError()
         }
         
         constraint.isActive = true
@@ -174,7 +176,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoSetDimensions(to size: CGSize) -> [NSLayoutConstraint] {
+    func autoSetDimensions(to size: CGSize) -> [NSLayoutConstraint] {
         
         let widthConstraint = autoSetDimension(.width, toSize: size.width)
         let heightConstraint = autoSetDimension(.height, toSize: size.height)
@@ -186,12 +188,12 @@ public extension UIView {
     // MARK: - Match Dimensions
     
     @discardableResult
-    public func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         return autoMatch(dimension, to: toDimension, of: otherView, withOffset: offset, relation: .equal)
     }
     
     @discardableResult
-    public func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
+    func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withOffset offset: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
@@ -207,6 +209,8 @@ public extension UIView {
             constraint = anchor.constraint(greaterThanOrEqualTo: toAnchor, constant: offset)
         case .lessThanOrEqual:
             constraint = anchor.constraint(lessThanOrEqualTo: toAnchor, constant: offset)
+        @unknown default:
+            fatalError()
         }
         
         constraint.isActive = true
@@ -214,12 +218,12 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withMultiplier multiplier: CGFloat) -> NSLayoutConstraint {
+    func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withMultiplier multiplier: CGFloat) -> NSLayoutConstraint {
         return autoMatch(dimension, to: toDimension, of: otherView, withMultiplier: multiplier, relation: .equal)
     }
     
     @discardableResult
-    public func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withMultiplier multiplier: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
+    func autoMatch(_ dimension: NLDimension, to toDimension: NLDimension, of otherView: UIView, withMultiplier multiplier: CGFloat, relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         let constraint: NSLayoutConstraint
@@ -235,6 +239,8 @@ public extension UIView {
             constraint = anchor.constraint(greaterThanOrEqualTo: toAnchor, multiplier: multiplier)
         case .lessThanOrEqual:
             constraint = anchor.constraint(lessThanOrEqualTo: toAnchor, multiplier: multiplier)
+        @unknown default:
+            fatalError()
         }
         
         constraint.isActive = true
@@ -245,7 +251,7 @@ public extension UIView {
     // MARK: - Pin to Layout Guides
     
     @discardableResult
-    public func autoPin(toTopLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
+    func autoPin(toTopLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -266,7 +272,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func autoPin(toBottomLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
+    func autoPin(toBottomLayoutGuideOf viewController: UIViewController, withInset inset: CGFloat, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -314,6 +320,8 @@ public extension UIView {
             constraint = anchor.constraint(greaterThanOrEqualTo: otherAnchor, constant: inset)
         case .lessThanOrEqual:
             constraint = anchor.constraint(lessThanOrEqualTo: otherAnchor, constant: inset)
+        @unknown default:
+            fatalError()
         }
         
         constraint.isActive = true
@@ -406,6 +414,8 @@ public extension UIView {
             return anchor.constraint(greaterThanOrEqualTo: toAnchor, constant: offset)
         case .lessThanOrEqual:
             return anchor.constraint(lessThanOrEqualTo: toAnchor, constant: offset)
+        @unknown default:
+            fatalError()
         }
         
     }
@@ -420,6 +430,8 @@ public extension UIView {
             return anchor.constraint(greaterThanOrEqualTo: toAnchor, constant: offset)
         case .lessThanOrEqual:
             return anchor.constraint(lessThanOrEqualTo: toAnchor, constant: offset)
+        @unknown default:
+            fatalError()
         }
         
     }
@@ -437,6 +449,8 @@ public extension UIView {
             return anchor.constraint(greaterThanOrEqualTo: toAnchor, constant: offset)
         case .lessThanOrEqual:
             return anchor.constraint(lessThanOrEqualTo: toAnchor, constant: offset)
+        @unknown default:
+            fatalError()
         }
 
     }
@@ -460,10 +474,10 @@ public extension UIView {
     private func reverseRelation(for relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint.Relation {
         
         switch relation {
-            
         case .equal:                return .equal
         case .greaterThanOrEqual:   return .lessThanOrEqual
         case .lessThanOrEqual:      return .greaterThanOrEqual
+        @unknown default:           fatalError()
         }
         
     }
